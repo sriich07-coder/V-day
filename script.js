@@ -1,30 +1,38 @@
 // script.js
 
-let noButton = document.getElementById('noBtn');
-let yesButton = document.getElementById('yesBtn');
+let buttonVisible = true;
 
-// Array of funny no responses
-let noResponses = [
-    "Are you sure you want to say that?",
-    "Nah, let's not do that.",
-    "No way, José!",
-    "Not in a million years!",
-    "I think I'll pass on that one!",
-    "You've got to be kidding me!",
-    "How about a big NO instead?"
-];
-
-function moveNoButton(e) {
-    noButton.style.position = 'absolute';
-    noButton.style.left = e.pageX + 'px';
-    noButton.style.top = e.pageY + 'px';
+function checkResponse(response) {
+    if (response === 'yes') {
+        alert('Thank you for the affirmation!');
+        buttonVisible = false;
+    } else {
+        showFunnyResponse();
+    }
+    updateButtonVisibility();
 }
 
-noButton.addEventListener('mousemove', moveNoButton);
+function updateButtonVisibility() {
+    const button = document.getElementById('responseButton');
+    if (buttonVisible) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+}
 
-yesButton.addEventListener('click', function() {
-    noButton.style.display = 'none';
-});
+function showFunnyResponse() {
+    const responses = [
+        "No way, José!",
+        "Not today!",
+        "I'd rather hug a cactus!",
+        "Nope, not happening!",
+        "Try again tomorrow!",
+        "Not in this lifetime!"
+    ];
+    const randomIndex = Math.floor(Math.random() * responses.length);
+    alert(responses[randomIndex]);
+}
 
-// Keep the No button always visible and follow the cursor
-document.addEventListener('mousemove', moveNoButton);
+const responseButton = document.getElementById('responseButton');
+responseButton.addEventListener('click', () => checkResponse('yes')); // Simulate a 'yes' response
