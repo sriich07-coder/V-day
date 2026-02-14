@@ -17,13 +17,17 @@ function onYouTubeIframeAPIReady() {
       modestbranding: 1,
       playsinline: 1,
       rel: 0,
-      showinfo: 0
+      showinfo: 0,
+      start: 13
     },
     events: {
-      onReady: onPlayerReady
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
     }
   })
 }
+
+const START_TIME = 13
 
 function onPlayerReady(event) {
   event.target.unMute()
@@ -31,6 +35,13 @@ function onPlayerReady(event) {
   musicPlaying = true
   const toggle = document.getElementById('music-toggle')
   if (toggle) toggle.textContent = '🔊'
+}
+
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    event.target.seekTo(START_TIME)
+    event.target.playVideo()
+  }
 }
 
 function toggleMusic() {
