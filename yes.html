@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="hearts-bg" aria-hidden="true"></div>
+    <div class="hearts-float" id="hearts-float" aria-hidden="true"></div>
+
+    <div class="container yes-container">
+        <h1 class="yes-title">I knew you'd say yes! 💕🎉</h1>
+        <p class="yes-subtitle">(My heart just did a backflip. No cap.)</p>
+
+        <div class="gif-container">
+            <img id="cat-gif" src="https://media.tenor.com/eNHbizSfVb0AAAAj/lovemode-cute.gif" alt="celebrating">
+        </div>
+
+        <p class="yes-message">You just made me the happiest human on this planet! 💖</p>
+        <p class="yes-message-2">Get ready for unlimited cuddles and cheesy puns. 💘</p>
+    </div>
+
+    <div id="youtube-player-wrap" aria-hidden="true"></div>
+
+    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">🔊</button>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="yes-script.js"></script>
+</body>
+</html>
