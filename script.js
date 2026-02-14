@@ -15,6 +15,7 @@ const noMessages = [
   "No",
   "Are you *sure* sure? 🤔",
   "Babe please... my heart is fragile 🥺",
+  "Pretty please my dear cloudy 🥺💕",
   "If you say no I'll write sad poetry about you...",
   "I'm gonna need a minute... and maybe ice cream 😢",
   "Please??? My little heart can't take it 💔",
@@ -110,7 +111,7 @@ function toggleMusic() {
 function spawnHearts() {
   const wrap = document.getElementById('hearts-float')
   if (!wrap) return
-  const hearts = ['💕', '💗', '💖', '💝', '💓', '❤️', '💘']
+  const hearts = ['💕', '💗', '💖', '💝', '💓', '❤️', '💘', '✨', '🌸', '🌷']
   for (let i = 0; i < 12; i++) {
     const el = document.createElement('span')
     el.className = 'heart-bubble'

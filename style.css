@@ -12,19 +12,20 @@ body {
   align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
-  /* Vibrant but subtle – soft coral, blush, lavender; sync feel via slow rhythm */
-  background: linear-gradient(160deg,
-    #2d1b2e 0%,
-    #3d2840 18%,
-    #5c3d5c 35%,
-    #7b4f6b 50%,
-    #9d6b7a 68%,
-    #c48b94 82%,
-    #e8b4bc 95%,
-    #f8e0e4 100%);
+  /* Colorful, pretty – rose gold, millennial pink, peach, lavender */
+  background: linear-gradient(165deg,
+    #1a0e14 0%,
+    #3d2040 12%,
+    #6b2d5c 25%,
+    #a84d6b 40%,
+    #d46b7a 55%,
+    #e89aa8 70%,
+    #f5c4ce 82%,
+    #ffdde4 92%,
+    #ffe8ee 100%);
   background-attachment: fixed;
   background-size: 400% 400%;
-  animation: gradientShift 8s ease-in-out infinite;
+  animation: gradientShift 10s ease-in-out infinite;
 }
 
 @keyframes gradientShift {
@@ -32,7 +33,7 @@ body {
   50% { background-position: 100% 50%; }
 }
 
-/* Floating hearts – smoother, more subtle */
+/* Floating hearts & sparkles – more visible, pretty */
 .hearts-bg {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -43,29 +44,32 @@ body {
 
 .hearts-bg::before,
 .hearts-bg::after {
-  content: '💕 💗 💖 💝 💓 ❤️ 💘 💕 💗 💖 💝 💓 ❤️';
   position: absolute;
-  font-size: 1.6rem;
-  opacity: 0.22;
-  animation: floatHearts 18s linear infinite;
   white-space: nowrap;
   top: 100%;
-  left: 5%;
-  text-shadow: 0 0 24px rgba(255, 182, 193, 0.35);
+  font-size: 1.7rem;
+  opacity: 0.32;
+  animation: floatHearts 16s linear infinite;
+  text-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
   will-change: transform;
 }
 
+.hearts-bg::before {
+  content: '💕 💗 💖 💝 💓 ❤️ 💘 🌸 ✨ 💕 💗 💖';
+  left: 5%;
+}
+
 .hearts-bg::after {
-  animation-delay: 9s;
-  animation-duration: 20s;
-  left: 55%;
-  content: '💗 💖 💝 💓 ❤️ 💘 💕 💗 💖 💝 💓 ❤️ 💘';
-  opacity: 0.18;
+  content: '💗 💖 💝 💓 ❤️ 💘 🌷 ✨ 💕 💗 💖 💝';
+  left: 52%;
+  animation-delay: 8s;
+  animation-duration: 18s;
+  opacity: 0.26;
 }
 
 @keyframes floatHearts {
-  from { transform: translateY(0) rotate(0deg); opacity: 0.22; }
-  to { transform: translateY(-120vh) rotate(8deg); opacity: 0; }
+  from { transform: translateY(0) rotate(0deg); opacity: 0.32; }
+  to { transform: translateY(-120vh) rotate(6deg); opacity: 0; }
 }
 
 .hearts-float {
@@ -79,10 +83,10 @@ body {
 .heart-bubble {
   position: absolute;
   bottom: -2rem;
-  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
-  opacity: 0.5;
+  font-size: clamp(1.2rem, 2.4vw, 2rem);
+  opacity: 0.58;
   animation: riseHeart 14s cubic-bezier(0.33, 0, 0.2, 1) infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.3));
+  filter: drop-shadow(0 0 12px rgba(255, 182, 193, 0.4));
   will-change: transform, opacity;
 }
 
@@ -124,10 +128,13 @@ body {
   animation: pageEnter 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
 }
 
-.container.loaded .page-enter:nth-child(1) { animation-delay: 0.1s; }
-.container.loaded .page-enter:nth-child(2) { animation-delay: 0.28s; }
-.container.loaded .page-enter:nth-child(3) { animation-delay: 0.46s; }
-.container.loaded .page-enter:nth-child(4) { animation-delay: 0.64s; }
+.container.loaded .page-enter:nth-child(1) { animation-delay: 0.08s; }
+.container.loaded .page-enter:nth-child(2) { animation-delay: 0.2s; }
+.container.loaded .page-enter:nth-child(3) { animation-delay: 0.35s; }
+.container.loaded .page-enter:nth-child(4) { animation-delay: 0.5s; }
+.container.loaded .page-enter:nth-child(5) { animation-delay: 0.62s; }
+.container.loaded .page-enter:nth-child(6) { animation-delay: 0.74s; }
+.container.loaded .page-enter:nth-child(7) { animation-delay: 0.86s; }
 
 @keyframes pageEnter {
   to {
@@ -141,18 +148,37 @@ body {
   50% { transform: scale(1.008); }
 }
 
-/* Removed .tagline – not used on main anymore */
+.sparkle-line {
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.sub-line {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-style: italic;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
 
 h1 {
   font-family: 'Playfair Display', 'Nunito', serif;
   font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 900;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, #fff 0%, #ffe4ec 35%, #ffb8c9 65%, #ff85a2 100%);
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 0%, #ffe0e9 25%, #ffb8c9 50%, #ff9eb5 75%, #ff85a2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
   animation: wiggle 3s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
@@ -177,23 +203,23 @@ h1 .heart-accent {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* GIF area – cleaner, HD-friendly frame */
+/* GIF area – pretty rose-gold frame */
 .gif-container {
   margin: 24px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 0 60px rgba(255, 182, 193, 0.06);
+  padding: 22px;
+  background: linear-gradient(145deg, rgba(255, 220, 230, 0.12), rgba(255, 182, 193, 0.06));
+  border-radius: 32px;
+  border: 2px solid rgba(255, 182, 193, 0.35);
+  box-shadow: 0 14px 44px rgba(180, 80, 100, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 80px rgba(255, 182, 193, 0.08);
   animation: gifGlow 5s ease-in-out infinite;
 }
 
 @keyframes gifGlow {
-  0%, 100% { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), inset 0 0 60px rgba(255, 182, 193, 0.06); }
-  50% { box-shadow: 0 14px 48px rgba(0, 0, 0, 0.18), inset 0 0 70px rgba(255, 182, 193, 0.1); }
+  0%, 100% { box-shadow: 0 14px 44px rgba(180, 80, 100, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 80px rgba(255, 182, 193, 0.08); border-color: rgba(255, 182, 193, 0.35); }
+  50% { box-shadow: 0 18px 52px rgba(200, 90, 120, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.15), inset 0 0 90px rgba(255, 182, 193, 0.12); border-color: rgba(255, 192, 203, 0.5); }
 }
 
 #cat-gif {
@@ -221,16 +247,16 @@ h1 .heart-accent {
 }
 
 .yes-hint {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.9);
   font-style: italic;
   font-weight: 600;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.6s ease 0.3s both;
 }
 
 #yes-btn {
-  background: linear-gradient(135deg, #ff7ba3 0%, #d64d75 50%, #ff1493 100%);
+  background: linear-gradient(135deg, #ff9ebb 0%, #ff6b9d 35%, #e84d7a 70%, #ff1493 100%);
   color: white;
   border: none;
   border-radius: 50px;
@@ -246,8 +272,8 @@ h1 .heart-accent {
 
 #yes-btn:hover {
   transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 12px 36px rgba(196, 69, 105, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.25);
-  filter: brightness(1.08);
+  box-shadow: 0 14px 40px rgba(232, 77, 122, 0.55), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  filter: brightness(1.1);
 }
 
 #yes-btn:active {
@@ -291,6 +317,7 @@ h1 .heart-accent {
 #tease-toast.show {
   opacity: 1;
   transform: translateY(0);
+  color: #ffe4ec;
 }
 
 #tease-toast.show.tease-toast-moving {
@@ -308,15 +335,15 @@ h1 .heart-accent {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: linear-gradient(135deg, rgba(255, 105, 180, 0.88), rgba(196, 69, 105, 0.88));
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(135deg, rgba(255, 154, 188, 0.92), rgba(232, 77, 122, 0.9));
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   width: 56px;
   height: 56px;
   font-size: 1.5rem;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  box-shadow: 0 6px 22px rgba(196, 69, 105, 0.45);
+  box-shadow: 0 8px 28px rgba(232, 77, 122, 0.5);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
   z-index: 100;
 }
@@ -327,6 +354,27 @@ h1 .heart-accent {
 }
 
 /* ---------- Yes page ---------- */
+.sideline-thanks {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 50;
+  animation: fadeIn 0.8s ease 1s both;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 600px) {
+  .sideline-thanks {
+    right: 28px;
+    bottom: 100px;
+    font-size: 1.1rem;
+  }
+}
+
 .yes-container .tagline,
 .yes-container .subtitle {
   display: none;
