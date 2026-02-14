@@ -1,4 +1,4 @@
-const YOUTUBE_VIDEO_ID = 'vEmBUhnBtFI'
+const YOUTUBE_VIDEO_ID = 'vEmBUhnBtFI';
 
 const gifStages = [
   "https://media.tenor.com/EBV7OT7ACfwAAAAj/u-u-qua-qua-u-quaa.gif",
@@ -11,6 +11,7 @@ const gifStages = [
   "https://media1.tenor.com/m/uDugCXK4vI4AAAAC/chiikawa-hachiware.gif"
 ]
 
+// *Revised* expanded funny No responses
 const noMessages = [
   "No",
   "Are you *sure* sure? 🤔",
@@ -22,32 +23,36 @@ const noMessages = [
   "Don't do me like this...",
   "Last chance! I'm too cute to refuse 😭",
   "You can't catch me anyway 😜",
-  "Okay but like... think about it 💭",
-  "I'll keep asking until you say yes! 😤",
-  "Plot twist: you actually want to say yes 👀",
-  "My heart might explode if you say no again 💥",
-  "This is getting ridiculous, say YES already! 😫"
-]
+  "No power in this verse can make me say yes!",
+  "Is that your final answer? Millionaire? 🤑",
+  "I'm training for the No Olympics 🏃‍♂️",
+  "Sorry, my heart says 'No' but my eyes say 'maybe' 👀",
+  "On strike until I get chocolate! 🍫",
+  "Are you even trying? 😂",
+  "Just hit Yes, it's fate! 🔮"
+];
 
+// Tease pokes WITHOUT 'Yes is best answer'
 const yesTeasePokes = [
   "Hey you! Try clicking No first... it's worth it, promise 💕",
   "No is the secret button. Go on, give it a tap! ✨",
   "Pssst... the No button does something silly. You'll see 😊",
   "Let's explore what the No button does! 💖"
-]
+];
 
-let yesTeasedCount = 0
-let noClickCount = 0
-let runawayEnabled = false
-let musicPlaying = true
-let ytPlayer = null
+let yesTeasedCount = 0;
+let noClickCount = 0;
+let runawayEnabled = false;
+let musicPlaying = true;
+let ytPlayer = null;
 
-const catGif = document.getElementById('cat-gif')
-const yesBtn = document.getElementById('yes-btn')
-const noBtn = document.getElementById('no-btn')
-const musicToggle = document.getElementById('music-toggle')
+const catGif = document.getElementById('cat-gif');
+const yesBtn = document.getElementById('yes-btn');
+const noBtn = document.getElementById('no-btn');
+const musicToggle = document.getElementById('music-toggle');
 
-// YouTube IFrame API
+// ---- YouTube Music Logic (untouched) ----
+
 function onYouTubeIframeAPIReady() {
   ytPlayer = new YT.Player('youtube-player-wrap', {
     height: '1',
@@ -70,168 +75,185 @@ function onYouTubeIframeAPIReady() {
       onReady: onPlayerReady,
       onStateChange: onPlayerStateChange
     }
-  })
+  });
 }
 
-const START_TIME = 13
+const START_TIME = 13;
 
 function onPlayerReady(event) {
-  event.target.mute()
-  event.target.playVideo()
-  document.addEventListener('click', unmuteOnFirstClick, { once: true })
+  event.target.mute();
+  event.target.playVideo();
+  document.addEventListener('click', unmuteOnFirstClick, { once: true });
 }
 
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.ENDED) {
-    event.target.seekTo(START_TIME)
-    event.target.playVideo()
+    event.target.seekTo(START_TIME);
+    event.target.playVideo();
   }
 }
 
 function unmuteOnFirstClick() {
   if (ytPlayer && ytPlayer.unMute) {
-    ytPlayer.unMute()
-    musicPlaying = true
-    if (musicToggle) musicToggle.textContent = '🔊'
+    ytPlayer.unMute();
+    musicPlaying = true;
+    if (musicToggle) musicToggle.textContent = '🔊';
   }
 }
 
 function toggleMusic() {
-  if (!ytPlayer || !ytPlayer.getPlayerState) return
-  const state = ytPlayer.getPlayerState()
+  if (!ytPlayer || !ytPlayer.getPlayerState) return;
+  const state = ytPlayer.getPlayerState();
   if (musicPlaying) {
-    ytPlayer.pauseVideo()
-    musicPlaying = false
-    musicToggle.textContent = '🔇'
+    ytPlayer.pauseVideo();
+    musicPlaying = false;
+    musicToggle.textContent = '🔇';
   } else {
-    ytPlayer.unMute()
-    ytPlayer.playVideo()
-    musicPlaying = true
-    musicToggle.textContent = '🔊'
+    ytPlayer.unMute();
+    ytPlayer.playVideo();
+    musicPlaying = true;
+    musicToggle.textContent = '🔊';
   }
 }
 
-// Spawn extra floating hearts
+// ---- UI and Button Logic ----
+
 function spawnHearts() {
   const wrap = document.getElementById('hearts-float')
-  if (!wrap) return
-  const hearts = ['💕', '💗', '💖', '💝', '💓', '❤️', '💘', '✨', '🌸', '🌷']
+  if (!wrap) return;
+  const hearts = ['💕', '💗', '💖', '💝', '💓', '❤️', '💘', '✨', '🌸', '🌷'];
   for (let i = 0; i < 12; i++) {
-    const el = document.createElement('span')
-    el.className = 'heart-bubble'
-    el.textContent = hearts[i % hearts.length]
-    el.style.left = Math.random() * 100 + '%'
-    el.style.animationDelay = Math.random() * 8 + 's'
-    el.style.animationDuration = (10 + Math.random() * 6) + 's'
-    wrap.appendChild(el)
+    const el = document.createElement('span');
+    el.className = 'heart-bubble';
+    el.textContent = hearts[i % hearts.length];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDelay = Math.random() * 8 + 's';
+    el.style.animationDuration = (10 + Math.random() * 6) + 's';
+    wrap.appendChild(el);
   }
 }
 
+// Teasing Yes message logic
 function handleYesClick() {
   if (!runawayEnabled) {
-    const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)]
-    yesTeasedCount++
-    showTeaseMessage(msg)
-    return
+    const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)];
+    yesTeasedCount++;
+    showTeaseMessage(msg);
+    return;
   }
-  window.location.href = 'yes.html'
+  window.location.href = 'yes.html';
 }
 
 function showTeaseMessage(msg) {
   const toast = document.getElementById('tease-toast')
-  toast.textContent = msg
-  toast.classList.add('show', 'tease-toast-moving')
-  clearTimeout(toast._timer)
+  toast.textContent = msg;
+  toast.classList.add('show', 'tease-toast-moving');
+  clearTimeout(toast._timer);
 }
 
+// Main No logic! (never vanishes)
 function handleNoClick() {
-  noClickCount++
-  const msgIndex = Math.min(noClickCount, noMessages.length - 1)
-  noBtn.textContent = noMessages[msgIndex]
-  const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
-  yesBtn.style.fontSize = `${currentSize * 1.35}px`
-  const padY = Math.min(18 + noClickCount * 5, 60)
-  const padX = Math.min(45 + noClickCount * 10, 120)
-  yesBtn.style.padding = `${padY}px ${padX}px`
+  noClickCount++;
+
+  // Pick response, never overflow array
+  const msgIndex = Math.min(noClickCount, noMessages.length - 1);
+  noBtn.textContent = noMessages[msgIndex];
+
+  // Animate Yes growing
+  const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+  yesBtn.style.fontSize = `${currentSize * 1.35}px`;
+  const padY = Math.min(18 + noClickCount * 5, 60);
+  const padX = Math.min(45 + noClickCount * 10, 120);
+  yesBtn.style.padding = `${padY}px ${padX}px`;
+
+  // Animate No shrinking a bit (but not smaller than 14px)
   if (noClickCount >= 2) {
-    const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
-    noBtn.style.fontSize = `${Math.max(noSize * 0.88, 14)}px`
+    const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+    noBtn.style.fontSize = `${Math.max(noSize * 0.88, 14)}px`;
   }
-  const gifIndex = Math.min(noClickCount, gifStages.length - 1)
-  swapGif(gifStages[gifIndex])
+
+  // GIF swap
+  const gifIndex = Math.min(noClickCount, gifStages.length - 1);
+  swapGif(gifStages[gifIndex]);
+
+  // After N clicks, make No run away!
   if (noClickCount >= 5 && !runawayEnabled) {
-    enableRunaway()
+    enableRunaway();
   }
+  // ON EVERY CLICK: ensure it's on screen!
+  ensureNoVisible();
 }
 
+// Keep the gif fading smoothly
 function swapGif(src) {
-  catGif.style.opacity = '0'
+  catGif.style.opacity = '0';
   setTimeout(() => {
-    catGif.src = src
-    catGif.style.opacity = '1'
-  }, 200)
+    catGif.src = src;
+    catGif.style.opacity = '1';
+  }, 200);
 }
 
+// Runaway logic
 function enableRunaway() {
-  noBtn.style.position = 'fixed'
-  noBtn.style.zIndex = '50'
-  noBtn.style.pointerEvents = 'auto'
-  runawayEnabled = true
-  noBtn.style.opacity = '1'
-  noBtn.style.display = 'block'
-  runAway()
-  noBtn.removeEventListener('mouseover', runAway)
-  noBtn.removeEventListener('touchstart', runAway)
-  document.removeEventListener('mousemove', runAwayIfClose)
-  noBtn.addEventListener('mouseover', runAway)
-  noBtn.addEventListener('touchstart', runAway, { passive: true })
-  document.addEventListener('mousemove', runAwayIfClose)
+  runawayEnabled = true;
+  noBtn.style.position = 'fixed';
+  noBtn.style.zIndex = '50';
+  runAway();
+  noBtn.addEventListener('mouseover', runAway);
+  noBtn.addEventListener('touchstart', runAway, { passive: true });
+  document.addEventListener('mousemove', runAwayIfClose);
+  noBtn.style.opacity = '1';
+  noBtn.style.display = 'block';
+  noBtn.style.visibility = 'visible';
 }
 
-const RUNAWAY_DISTANCE = 120
-
+// Run away if cursor is near
+const RUNAWAY_DISTANCE = 120;
 function runAwayIfClose(e) {
-  if (!runawayEnabled) return
-  if (!noBtn) return
-  const rect = noBtn.getBoundingClientRect()
-  if (!rect) return
-  const cx = rect.left + rect.width / 2
-  const cy = rect.top + rect.height / 2
-  const dist = Math.hypot(e.clientX - cx, e.clientY - cy)
-  if (dist < RUNAWAY_DISTANCE) {
-    runAway()
-  }
+  if (!runawayEnabled) return;
+  const rect = noBtn.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+  if (dist < RUNAWAY_DISTANCE) runAway();
 }
 
 function runAway() {
-  if (!runawayEnabled) return
-  if (!noBtn) return
-  const margin = 24
-  const btnW = noBtn.offsetWidth
-  const btnH = noBtn.offsetHeight
-  const maxX = Math.max(window.innerWidth - btnW - margin, margin)
-  const maxY = Math.max(window.innerHeight - btnH - margin, margin)
-  const randomX = Math.random() * maxX + margin / 2
-  const randomY = Math.random() * maxY + margin / 2
-  noBtn.style.left = `${randomX}px`
-  noBtn.style.top = `${randomY}px`
-  noBtn.style.opacity = '1'
-  noBtn.style.display = 'block'
-  noBtn.style.visibility = 'visible'
+  const margin = 24;
+  const btnW = noBtn.offsetWidth;
+  const btnH = noBtn.offsetHeight;
+  // Clamp boundaries so button cannot go outside
+  const maxX = window.innerWidth - btnW - margin;
+  const maxY = window.innerHeight - btnH - margin;
+  const randomX = Math.random() * maxX + margin / 2;
+  const randomY = Math.random() * maxY + margin / 2;
+  noBtn.style.left = `${randomX}px`;
+  noBtn.style.top = `${randomY}px`;
+  ensureNoVisible();
 }
 
-spawnHearts()
-
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('main-container')
-  if (container) requestAnimationFrame(() => container.classList.add('loaded'))
-})
-
-setInterval(() => {
-  if (runawayEnabled && noBtn) {
-    noBtn.style.opacity = '1'
-    noBtn.style.display = 'block'
-    noBtn.style.visibility = 'visible'
-    noBtn.style.pointerEvents = 'auto'
+// Ensure No button is always visible and clickable
+function ensureNoVisible() {
+  noBtn.style.opacity = '1';
+  noBtn.style.display = 'block';
+  noBtn.style.visibility = 'visible';
+  noBtn.disabled = false;
+  noBtn.style.pointerEvents = 'auto';
+  // Clamp button inside viewport
+  const rect = noBtn.getBoundingClientRect();
+  if (rect.left < 0 || rect.top < 0 ||
+      rect.right > window.innerWidth ||
+      rect.bottom > window.innerHeight) {
+    noBtn.style.left = '50vw';
+    noBtn.style.top = '70vh';
   }
-}, 100)
+}
+
+// Hearts and page anim onload
+spawnHearts();
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('main-container');
+  if (container) requestAnimationFrame(() => container.classList.add('loaded'));
+});
+// Redundant interval safeguard
+setInterval(ensureNoVisible, 333);
