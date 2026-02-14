@@ -28,12 +28,12 @@ const yesTeasePokes = [
   "Hey you! Try clicking No first... it's worth it, promise 💕",
   "No is the secret button. Go on, give it a tap! ✨",
   "Pssst... the No button does something silly. You'll see 😊",
-  "Yes is the best answer, but No is the fun one first! 💖"
+  "Let's explore what the No button does! 💖"
 ]
 
 let yesTeasedCount = 0
 let noClickCount = 0
-let runawayEnabled = false
+let runawayEnabled = true  // Keep runaway button continuously active
 let musicPlaying = true
 let ytPlayer = null
 
@@ -184,13 +184,14 @@ function enableRunaway() {
   noBtn.addEventListener('touchstart', runAway, { passive: true })
 
   // Run away when cursor gets close (before hover) so it keeps moving until they hit Yes
+  // Keep the mousemove listener active to continuously track cursor
   document.addEventListener('mousemove', runAwayIfClose)
 }
 
 const RUNAWAY_DISTANCE = 120
 
 function runAwayIfClose(e) {
-  if (!runawayEnabled) return
+  // Continuously run away while cursor is nearby
   const rect = noBtn.getBoundingClientRect()
   const cx = rect.left + rect.width / 2
   const cy = rect.top + rect.height / 2
